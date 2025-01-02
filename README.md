@@ -7,6 +7,8 @@ A simple tool to fetch and display random GitHub repositories. Useful for discov
 
 
 ---
+## 💡 Project Idea from  roadmap.sh
+- [se the project idea](https://roadmap.sh/projects/github-random-repo)
 
 ## 🌟 Features
 
