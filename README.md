@@ -1,8 +1,39 @@
-# React + Vite
+# GitHub Random Repository 🎲
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple tool to fetch and display random GitHub repositories. Useful for discovering interesting projects!
 
-Currently, two official plugins are available:
+## 📷 Screenshots
+![screen](./src/assets/screen.PNG)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+---
+
+## 🌟 Features
+
+- Fetches random repositories from GitHub.
+- Explore repositories by topic, stars, or languages.
+- Easy-to-use interface.
+
+---
+
+## 📦 Installation
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/shiinedev/Github-Random-Repository.git
+   ```
+2. Navigate to the project directory:
+    ```bash 
+    cd Github-Random-Repository
+    ```
+3. Install dependencies (if applicable):
+    ```bash
+    npm install
+    ```
+### 🚀 Usage
+Run the application:
+```bash
+npm run dev
+```
+
+    
