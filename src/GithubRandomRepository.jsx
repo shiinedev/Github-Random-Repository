@@ -37,9 +37,9 @@ function GithubRandomRepository() {
       console.log(data.items[index]);
       setRepo(data.items[index]);
       setIsLoading(false);
-    } catch (error) {
-      console.error("error", error);
-      setError(error);
+    } catch (err) {
+      setError(err);
+      console.error("error", err);
     }
   };
 
@@ -68,8 +68,8 @@ function GithubRandomRepository() {
           gap: "10px",
         }}
       >
-        <i class="fa-brands fa-github" style={{ fontSize: "20px" }}></i>
-        <h1>Github Random Repository</h1>
+        <i className="fa-brands fa-github" style={{ fontSize: "15px" }}></i>
+        <h1 style={{ fontSize: "20px" }}>Github Random Repository</h1>
       </div>
 
       <select
@@ -81,7 +81,21 @@ function GithubRandomRepository() {
         ))}
       </select>
 
-      {isLoading && <p>loading.....</p>}
+      {isLoading &&(
+        <div
+        style={{
+          backgroundColor: "#f4f1f8",
+            fontSize: "30px",
+            fontWeight:"bold",
+            padding: "10px",
+            borderRadius: "10px",
+            marginTop: "10px",
+            width: "60%",
+            textAlign:"center"
+        }}> 
+           <p>loading.....</p>
+        </div>
+      )}
       {error && (
         <div>
           <p>Error, {error}</p>
@@ -130,7 +144,7 @@ function GithubRandomRepository() {
                 gap: "3px",
               }}
             >
-              <i class="fa-solid fa-star" style={{ fontSize: "10px" }}></i>
+              <i className="fa-solid fa-star" style={{ fontSize: "10px" }}></i>
               {repo.stargazers_count.toLocaleString("en-US")}
             </span>
 
@@ -142,7 +156,7 @@ function GithubRandomRepository() {
                 gap: "3px",
               }}
             >
-              <i class="fa-solid fa-code-fork" style={{ fontSize: "10px" }}></i>
+              <i className="fa-solid fa-code-fork" style={{ fontSize: "10px" }}></i>
               {repo.forks.toLocaleString("en-US")}
             </span>
 
@@ -159,7 +173,7 @@ function GithubRandomRepository() {
                 target="_blank"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <i class="fa-brands fa-github" style={{ fontSize: "20px" }}></i>
+                <i className="fa-brands fa-github" style={{ fontSize: "20px" }}></i>
               </a>
             </span>
            
