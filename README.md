@@ -3,7 +3,7 @@
 A simple tool to fetch and display random GitHub repositories. Useful for discovering interesting projects!
 
 ## 📷 Screenshots
-![screenshot](./src/assets/screen.PNG)
+![screenshot](./src/assets/darkmode.PNG)
 
 
 ---
