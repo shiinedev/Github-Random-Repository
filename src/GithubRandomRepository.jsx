@@ -70,7 +70,7 @@ function GithubRandomRepository() {
       className="flex justify-center items-center gap-2"
        
       >
-        <i className="fa-brands fa-github text-xl"  ></i>
+        <a href="https://github.com/shiinedev/Github-Random-Repository" target="_blank"><i className="fa-brands fa-github text-xl"  ></i></a> 
         <h1 className="lg:text-xl text-base font-bold">Github Random Repository</h1>
   
         <i
@@ -78,12 +78,12 @@ function GithubRandomRepository() {
          className={`fa-regular ${theme === "light"? "fa-moon bg-gray-50 text-black":"fa-sun bg-gray-900 text-white"} text-xl  rounded-full  p-2 text-center`}></i>
         
       </div>
-      {isLoading && <p>loading.....</p>}
+      {isLoading && <p className={` ${theme === "light"? " text-black":" text-white"} text-2xl text-center font-bold`}>loading.....</p>}
       {error && <p>{error}</p>}
       <select
         onChange={handleRandomRepo}
         
-        className={` ${theme === "light"?"bg-gray-50 text-black" : "bg-gray-700 text-white"} w-full p-2 rounded m-2`}
+        className={` ${theme === "light"?"bg-gray-50 text-black" : "bg-gray-700 text-white"} w-full p-3 my-2 rounded `}
       >
         {languages.map((lang,index) => (
           <option key={index} value={lang.value}>{lang.title}</option>
@@ -92,7 +92,7 @@ function GithubRandomRepository() {
 
       {repoLoading &&(
         <div
-        className={`${theme === "light"?"bg-gray-50 text-black" : "bg-gray-950 text-white"} text-xl font-bold p-2 rounded mt-2 text-center`}
+        className={`${theme === "light"?"bg-gray-50 text-black" : "bg-gray-950 text-white"}  text-xl font-bold p-2 rounded mt-2 text-center`}
         > 
            <p>loading.....</p>
         </div>
