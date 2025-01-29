@@ -13,7 +13,7 @@ A simple tool to fetch and display random GitHub repositories. Useful for discov
 ## 🌟 Features
 
 - Fetches random repositories from GitHub .
-- Explore repositories by topic, stars, or languages.
+- Explore repositories by topic, stars,or languages.
 - Easy-to-use interface.
 
 ---

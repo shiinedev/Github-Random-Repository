@@ -1,179 +1,142 @@
 import { useState, useEffect } from "react";
+import useFetch from "./Hooks/useFetch";
 
 function GithubRandomRepository() {
-  const [languages, setLanguages] = useState([]);
+ const [repoLoading,setRepoLoading] = useState(false);
+ const [repoError,setRepoError] = useState(null);
   const [repo, setRepo] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  useEffect(() => {
-    const fetchLanguages = async () => {
-      try {
-        const response = await fetch(
-          `https://raw.githubusercontent.com/kamranahmedse/githunt/master/src/components/filters/language-filter/languages.json`
-        );
-        const data = await response.json();
-        console.log();
-        setLanguages(data);
-      } catch (error) {
-        console.error("error", error);
-      }
-    };
-    fetchLanguages();
-  }, []);
+
+  const {data:languages,isLoading,error} = useFetch(`https://raw.githubusercontent.com/kamranahmedse/githunt/master/src/components/filters/language-filter/languages.json`)
+
 
   const handleRandomRepo = async (event) => {
     const language = event.target.value;
 
-    setIsLoading(true);
+    setRepoLoading(true);
     setRepo(null);
-    setError("");
+    setRepoError(null);
+
 
     try {
       const response = await fetch(
         `https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc`
       );
+
+      if(!response.ok){
+        throw new Error(`HTTP error! status:${response.status}`);
+      }
+
       const data = await response.json();
+      console.log(data.items);
       const index = Math.floor(Math.random() * data.items.length);
       console.log(data.items[index]);
       setRepo(data.items[index]);
-      setIsLoading(false);
+      setRepoLoading(false);
+      
     } catch (err) {
-      setError(err);
-      console.error("error", err);
+      setRepoError(err);
+      setRepoLoading(false);
+      console.error(err);
     }
   };
+ 
 
   const reset = () => {
     setRepo(null);
-    setIsLoading(false);
-    setError("");
+    setRepoLoading(false);
+    setRepoError(null);
   };
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        maxWidth: "500px",
-        marginInline: "auto",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "10px",
-        }}
-      >
-        <i className="fa-brands fa-github" style={{ fontSize: "15px" }}></i>
-        <h1 style={{ fontSize: "20px" }}>Github Random Repository</h1>
-      </div>
 
+
+  return (
+   <div className="w-screen flex justify-center">
+
+  
+    <div
+    className="flex justify-center items-center flex-col w-lg mx-2 mt-10 p-3 bg-gray-200 rounded "
+  
+    >
+
+      <div
+      className="flex justify-center items-center gap-2"
+       
+      >
+        <i className="fa-brands fa-github text-xl"  ></i>
+        <h1 className="lg:text-xl text-base font-bold">Github Random Repository</h1>
+        
+      </div>
+      {isLoading && <p>loading.....</p>}
+      {error && <p>{error}</p>}
       <select
         onChange={handleRandomRepo}
-        style={{ width: "60%", padding: "8px 10px" }}
+        
+        className="w-full bg-gray-50 p-2 rounded m-2"
       >
-        {languages.map((lang) => (
-          <option value={lang.value}>{lang.title}</option>
+        {languages.map((lang,index) => (
+          <option key={index} value={lang.value}>{lang.title}</option>
         ))}
       </select>
 
-      {isLoading &&(
+      {repoLoading &&(
         <div
-        style={{
-          backgroundColor: "#f4f1f8",
-            fontSize: "30px",
-            fontWeight:"bold",
-            padding: "10px",
-            borderRadius: "10px",
-            marginTop: "10px",
-            width: "60%",
-            textAlign:"center"
-        }}> 
+        className="bg-gray-50 text-xl font-bold p-2 rounded mt-2 text-center"
+        > 
            <p>loading.....</p>
         </div>
       )}
-      {error && (
-        <div>
-          <p>Error, {error}</p>
+      {repoError && (
+        <div  className="bg-gray-50 text-xl font-bold p-2 rounded mt-2 text-center">
+          <p>Error for Fetching data...</p>
           <button
-            style={{
-              backgroundColor: "red",
-              color: "white",
-              padding: "8px 15px",
-              border: "none",
-              borderRadius: "5px",
-            }}
+          className="bg-red-500 text-white py-1 px-2 mt-2 rounded border-none"
             onClick={reset}
           >
-            Click To Try
+            Click to try
           </button>
         </div>
       )}
       {repo && (
         <div
-          style={{
-            backgroundColor: "#f4f1f8",
-            fontSize: "24px",
-            padding: "10px",
-            borderRadius: "10px",
-            marginTop: "10px",
-            width: "60%",
-          }}
+         className=" w-full bg-gray-50 text-xl  p-3 rounded mt-2 "
+          
         >
-          <p style={{ fontWeight: "bold" }}>{repo.name}</p>
-          <p>{repo.description}</p>
+          <p className="font-bold text-xl">{repo.name}</p>
+          <p className=" text-xl text-gray-600  ">{repo.description || "No description.."}</p>
 
           <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
+          className="flex justify-between items-center my-2"
+           
           >
-            <span style={{ fontSize: "15px " }}>{repo.language}</span>
+            <span className="text-base font-medium">{repo.language}</span>
 
             <span
-              style={{
-                fontSize: "15px ",
-                display: "flex",
-                alignItems: "center",
-                gap: "3px",
-              }}
+            className="text-base flex items-center gap-1"
+              
             >
-              <i className="fa-solid fa-star" style={{ fontSize: "10px" }}></i>
+              <i className="fa-solid fa-star text-base" ></i>
               {repo.stargazers_count.toLocaleString("en-US")}
             </span>
 
             <span
-              style={{
-                fontSize: "15px ",
-                display: "flex",
-                alignItems: "center",
-                gap: "3px",
-              }}
+            className="text-base flex items-center gap-1"
+              
             >
-              <i className="fa-solid fa-code-fork" style={{ fontSize: "10px" }}></i>
+              <i className="fa-solid fa-code-fork text-base"></i>
               {repo.forks.toLocaleString("en-US")}
             </span>
 
             <span
-              style={{
-                fontSize: "15px ",
-                display: "flex",
-                alignItems: "center",
-                gap: "3px",
-              }}
+            className="text-base flex items-center gap-1"
+              
             >
               <a
                 href={repo.html_url}
                 target="_blank"
-                style={{ textDecoration: "none", color: "black" }}
+                className=" text-black text-base"
+                
               >
-                <i className="fa-brands fa-github" style={{ fontSize: "20px" }}></i>
+                <i className="fa-brands fa-github text-xl" ></i>
               </a>
             </span>
            
@@ -181,18 +144,14 @@ function GithubRandomRepository() {
 
           <button
             onClick={reset}
-            style={{
-              backgroundColor: "black",
-              color: "white",
-              padding: "8px 15px",
-              border: "none",
-              borderRadius: "5px",
-            }}
+            className="bg-black text-white text-center py-1 px-2 border-none rounded"
+            
           >
             Refresh
           </button>
         </div>
       )}
+    </div>
     </div>
   );
 }
