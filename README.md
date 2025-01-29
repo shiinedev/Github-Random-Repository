@@ -1,7 +1,6 @@
 # GitHub Random Repository 🎲
 
-A simple tool to fetch and display random GitHub repositories. Useful for discovering interesting projects!
-
+A React-based web application that fetches and displays random GitHub repositories using the GitHub API.
 ## 📷 Screenshots
 ![screenshot](./src/assets/darkmode.PNG)
 
@@ -12,11 +11,24 @@ A simple tool to fetch and display random GitHub repositories. Useful for discov
 
 ## 🌟 Features
 
-- Fetches random repositories from GitHub .
-- Explore repositories by topic, stars,or languages.
-- Easy-to-use interface.
+- 🔀 Fetches and displays a random GitHub repository.  
+- 📄 Shows repository details like name, description, and stars.  
+- 🎨 **Dark Mode support** for a better visual experience.  
+- ⚡ Fetch new repositories at  select the language.  
+- 📱 User-friendly and responsive UI. 
 
 ---
+## 🛠 Tech Stack  
+
+This project is built using the following technologies:
+
+| Technology | Description |
+|------------|-------------|
+| ⚛ **React.js** | JavaScript library for building UI components |
+| 🎨 **Tailwindcss** | Styling for the application |
+| 🌙 **Dark Mode** | Theme toggling with local storage support |
+| 🔥 **GitHub API** | Fetching repository data dynamically |
+| 📦 **Vite** | Faster development and optimized build |
 
 ## 📦 Installation
 
