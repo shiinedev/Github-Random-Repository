@@ -1,18 +1,15 @@
-import { useState, useEffect } from "react";
-import useFetch from "./Hooks/useFetch";
+import { useState } from "react";
+import useFetch from "../Hooks/useFetch";
+import RepoLoadingSkeleton from "./RepoLoadingSkeleton";
+import useTheme from "../Hooks/useTheme";
 
 function GithubRandomRepository() {
  const [repoLoading,setRepoLoading] = useState(false);
  const [repoError,setRepoError] = useState(null);
   const [repo, setRepo] = useState(null);
 
-  const [theme,setTheme] = useState("light");
+  const [theme,handleTheme] = useTheme("light");
 
-  const handleTheme = ()=>{
-      setTheme( (prevTheme) => prevTheme === "light"? "dark" : "light");
-  }
- 
- 
 
   const {data:languages,isLoading,error} = useFetch(`https://raw.githubusercontent.com/kamranahmedse/githunt/master/src/components/filters/language-filter/languages.json`)
 
@@ -58,7 +55,7 @@ function GithubRandomRepository() {
 
 
   return (
-   <div className={`${theme === "light"?"bg-gray-50 text-black" : "bg-gray-900 text-white"} h-screen w-screen flex mx-auto items-start justify-center`}>
+   <div className={`${theme === "light"? "bg-gray-50 text-black" : "bg-gray-900 text-white"} h-screen w-screen flex mx-auto items-start justify-center`}>
 
   
     <div
@@ -90,13 +87,8 @@ function GithubRandomRepository() {
         ))}
       </select>
 
-      {repoLoading &&(
-        <div
-        className={`${theme === "light"?"bg-gray-50 text-black" : "bg-gray-950 text-white"}  text-xl font-bold p-2 rounded mt-2 text-center`}
-        > 
-           <p>loading.....</p>
-        </div>
-      )}
+      {repoLoading &&<RepoLoadingSkeleton />
+        }
       {repoError && (
         <div  className={`${theme === "light"?"bg-gray-50 text-black" : "bg-gray-950 text-white"} text-xl font-bold p-2 rounded mt-2 text-center`}>
           <p>Error for Fetching data...</p>

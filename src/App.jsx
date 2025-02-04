@@ -1,5 +1,6 @@
+import GithubRandomRepository from "./components/GithubRandomRepository"
 
-import GithubRandomRepository from "./GithubRandomRepository"
+
 
 
 
